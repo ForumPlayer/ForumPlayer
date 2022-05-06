@@ -27,7 +27,12 @@ jobs:
           plugin_habits_from: 200
           plugin_notable: yes
           plugin_notable_from: organization
-          plugin_traffic: yes
+          plugin_wakatime: yes
+          plugin_wakatime_days: 7
+          plugin_wakatime_limit: 5
+          plugin_wakatime_sections: time, projects, languages, editors, os
+          plugin_wakatime_url: https://wakatime.com
+          plugin_wakatime_user: ForumPlayer
 
       - name: Music
         uses: lowlighter/metrics@latest
