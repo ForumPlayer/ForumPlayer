@@ -19,21 +19,25 @@ jobs:
           template: classic
           base: header, repositories
           config_timezone: America/Sao_Paulo
-          config_order: base.header, base.repositories, gists, languages, notable, habits
-          plugin_gists: yes
+          config_order: base.header, base.repositories, languages, notable, habits
           plugin_habits: yes
           plugin_habits_days: 14
           plugin_habits_facts: yes
           plugin_habits_from: 200
-          plugin_notable: yes
-          plugin_notable_from: organization
-          plugin_wakatime: yes
-          plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
-          plugin_wakatime_days: 7
-          plugin_wakatime_limit: 5
-          plugin_wakatime_sections: time, projects, languages, editors, os
-          plugin_wakatime_url: https://wakatime.com
-          plugin_wakatime_user: ForumPlayer
+
+      - name: Gists
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: gists-metrics.svg
+          output_action: commit
+          committer_branch: metrics
+
+          user: ForumPlayer
+          template: classic
+          base: gists
+          config_timezone: America/Sao_Paulo
+          plugin_gists: yes
 
       - name: Music
         uses: lowlighter/metrics@latest
@@ -66,3 +70,19 @@ jobs:
           plugin_anilist_sections: favorites, characters
           plugin_anilist_shuffle: yes
           plugin_anilist_user: ForumPlayer
+
+      - name: Wakatime
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          filename: wakatime-metrics.svg
+          output_action: commit
+          committer_branch: metrics
+          base: ""
+          plugin_wakatime: yes
+          plugin_wakatime_token: ${{ secrets.WAKATIME_TOKEN }}
+          plugin_wakatime_days: 7
+          plugin_wakatime_limit: 5
+          plugin_wakatime_sections: time, projects, languages, editors, os
+          plugin_wakatime_url: https://wakatime.com
+          plugin_wakatime_user: ForumPlayer
